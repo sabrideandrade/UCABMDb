@@ -1,7 +1,6 @@
 <h1> UCABMDb💡 </h1>
 
 <h2> DESCRIPTION </h2>
-<br>
 <p>
 - Objective: Develop a C++ application to store data about movies, series, and user opinions, allowing for adding, deleting, and managing this data. <br>
 - Data to Handle: Movies, series (with seasons and episodes), users, ratings, and reviews.  <br>
