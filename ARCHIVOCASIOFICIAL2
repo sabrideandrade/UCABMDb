@@ -1,0 +1,51 @@
+void guardar_usuarios(usuarios *p) {
+    ofstream archivo("archivo_usuarios.txt");
+    usuarios *actual = p;
+    while (actual != NULL) {
+        archivo << actual->id <<"\t "
+                << actual->nombre_usuario <<"\t "
+                << actual->correo_electronico <<"\t "
+                << actual->edad << "\t "
+                << actual->clave <<"\t "
+                << actual->nacionalidad << endl;
+        actual = actual->prx;
+    }
+    archivo.close();
+}
+
+void mostrar_usuarios() {
+    ifstream archivo("archivo_usuarios.txt");
+    string linea;
+    while (getline(archivo, linea)) {
+        cout << linea << endl;
+    }
+    archivo.close();
+}
+
+void cargar_usuarios(usuarios **p) {
+    ifstream archivo("archivo_usuarios.txt");
+    string linea;
+    while (getline(archivo, linea)) {
+        usuarios *nuevo_usuario = new usuarios;
+        nuevo_usuario->prx = NULL;
+        nuevo_usuario->prev = NULL;
+        istringstream iss(linea);
+        iss >> nuevo_usuario->id;
+        iss >> nuevo_usuario->nombre_usuario;
+        iss >> nuevo_usuario->correo_electronico;
+        iss >> nuevo_usuario->edad;
+        iss >> nuevo_usuario->clave;
+        getline(iss, nuevo_usuario->nacionalidad);
+        if (*p != NULL) {
+            (*p)->prev = nuevo_usuario;
+            nuevo_usuario->prx = *p;
+        }
+        *p = nuevo_usuario;
+    }
+    archivo.close();
+}
+
+bool archivo_vacio(usuarios *p){
+    if(p) return false;
+    return true;
+}
